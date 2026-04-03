@@ -50,11 +50,24 @@ a:hover {
 }
 
 .logo {
-    font-size: 1.25rem;
-    font-weight: 600;
-    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center; /* centra verticalmente */
+    gap: 10px; /* espacio entre imagen y texto */
 }
 
+.profile-img {
+    width: 50px; /* más equilibrado que 100px en header */
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.logo-text {
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: inherit;
+}
 /* Navigation New Styles */
 .site-nav {
     display: flex;

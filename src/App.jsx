@@ -10,6 +10,7 @@ import { Github, Linkedin, Mail } from "lucide-react";
 import Home from "./pages/Home";
 import About from "./pages/About";
 import "./index.css";
+import profileImg from "./img/profile.jpeg";
 
 function NavLinks() {
   const location = useLocation();
@@ -65,6 +66,16 @@ function App() {
       <div className="container">
         <header className="header">
           <div className="logo">
+            <img
+              src={profileImg}
+              alt="Profile"
+              style={{
+                width: "125px",
+                height: "125px",
+                borderRadius: "50%",
+                objectFit: "cover",
+              }}
+            />
             <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
               Luis San Martin
             </Link>
