@@ -16,7 +16,7 @@ function NavLinks() {
   const location = useLocation();
 
   return (
-    <div style={{ display: "flex", gap: "1.5rem", alignItems: "center" }}>
+    <div className="nav-area">
       <nav className="site-nav">
         <Link to="/" className={location.pathname === "/" ? "active" : ""}>
           Inicio
@@ -34,6 +34,7 @@ function NavLinks() {
           href="https://github.com/nachoavi?tab=repositories"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="GitHub"
         >
           <Github size={20} />
         </a>
@@ -41,10 +42,11 @@ function NavLinks() {
           href="https://www.linkedin.com/in/luis-san-martin-b30b32204/"
           target="_blank"
           rel="noopener noreferrer"
+          aria-label="LinkedIn"
         >
           <Linkedin size={20} />
         </a>
-        <a href="mailto:luis17.sanmartin@gmail.com">
+        <a href="mailto:luis17.sanmartin@gmail.com" aria-label="Correo">
           <Mail size={20} />
         </a>
       </nav>
@@ -65,19 +67,11 @@ function App() {
     <Router>
       <div className="container">
         <header className="header">
-          <div className="logo">
-            <img
-              src={profileImg}
-              alt="Profile"
-              style={{
-                width: "125px",
-                height: "125px",
-                borderRadius: "50%",
-                objectFit: "cover",
-              }}
-            />
-            <Link to="/" style={{ color: "inherit", textDecoration: "none" }}>
-              Luis San Martin
+          <div className="brand-block">
+            <img src={profileImg} alt="Luis San Martin" className="profile-avatar" />
+            <Link to="/" className="brand-copy">
+              <span className="brand-name">Luis San Martin</span>
+              <span className="brand-role">Full Stack Developer</span>
             </Link>
           </div>
           <NavLinks />
@@ -96,11 +90,8 @@ function App() {
         </motion.main>
 
         <footer className="footer">
-          <div>
-            © {new Date().getFullYear()} Luis San Martin. Todos los derechos
-            reservados.
-          </div>
-          <div>Portafolio Minimalista</div>
+          <div>© {new Date().getFullYear()} Luis San Martin.</div>
+          <div>Disponible para nuevos desafios</div>
         </footer>
       </div>
     </Router>
