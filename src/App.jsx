@@ -11,6 +11,7 @@ import Home from "./pages/Home";
 import About from "./pages/About";
 import "./index.css";
 import profileImg from "./img/profile.jpeg";
+import { Helmet } from "react-helmet";
 
 function NavLinks() {
   const location = useLocation();
@@ -65,10 +66,19 @@ function App() {
 
   return (
     <Router>
+      <>
+        <Helmet>
+          <title>Inicio | Mi Portafolio</title>
+        </Helmet>
+      </>
       <div className="container">
         <header className="header">
           <div className="brand-block">
-            <img src={profileImg} alt="Luis San Martin" className="profile-avatar" />
+            <img
+              src={profileImg}
+              alt="Luis San Martin"
+              className="profile-avatar"
+            />
             <Link to="/" className="brand-copy">
               <span className="brand-name">Luis San Martin</span>
               <span className="brand-role">Full Stack Developer</span>
