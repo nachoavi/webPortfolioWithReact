@@ -20,14 +20,14 @@ export default function About() {
   };
 
   return (
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
-        }}
-      >
+    <motion.div
+      initial="hidden"
+      animate="visible"
+      variants={{
+        hidden: { opacity: 0 },
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+      }}
+    >
       <motion.section className="hero hero-about" variants={itemVariants}>
         <h1>Sobre Mi</h1>
         <p>
@@ -41,7 +41,9 @@ export default function About() {
         <article className="value-card">
           <TimerReset size={20} />
           <h3>Entrega continua</h3>
-          <p>Iteraciones cortas con foco en impacto medible y feedback rapido.</p>
+          <p>
+            Iteraciones cortas con foco en impacto medible y feedback rapido.
+          </p>
         </article>
         <article className="value-card">
           <Handshake size={20} />
@@ -51,13 +53,16 @@ export default function About() {
         <article className="value-card">
           <BrainCircuit size={20} />
           <h3>IA aplicada</h3>
-          <p>Automatizacion y asistentes inteligentes integrados al producto.</p>
+          <p>
+            Automatizacion y asistentes inteligentes integrados al producto.
+          </p>
         </article>
       </motion.section>
 
       <motion.section variants={itemVariants} className="about-section-gap">
         <h2 className="section-title section-title-with-icon">
-          <GraduationCap size={24} color="var(--text-primary)" /> Trayectoria Académica
+          <GraduationCap size={24} color="var(--text-primary)" /> Trayectoria
+          Académica
         </h2>
         <div className="timeline">
           <div className="timeline-item">
@@ -65,7 +70,11 @@ export default function About() {
             <div className="timeline-content">
               <h3>Analista Programador</h3>
               <span className="timeline-date">2024 • CFT Inacap</span>
-              <p>Especialización en desarrollo de software, algoritmos avanzados, metodologías ágiles y creación de aplicaciones robustas preparadas para la industria tecnológica actual.</p>
+              <p>
+                Especialización en desarrollo de software, algoritmos avanzados,
+                metodologías ágiles y creación de aplicaciones robustas
+                preparadas para la industria tecnológica actual.
+              </p>
             </div>
           </div>
           <div className="timeline-item">
@@ -73,7 +82,11 @@ export default function About() {
             <div className="timeline-content">
               <h3>Administrador General</h3>
               <span className="timeline-date">2022 • Instituto IPG</span>
-              <p>Formación gerencial con una sólida base en gestión de proyectos, organización estratégica, y optimización de recursos, aportando una visión integral de negocio al desarrollo técnico.</p>
+              <p>
+                Formación gerencial con una sólida base en gestión de proyectos,
+                organización estratégica, y optimización de recursos, aportando
+                una visión integral de negocio al desarrollo técnico.
+              </p>
             </div>
           </div>
         </div>
@@ -104,7 +117,7 @@ export default function About() {
             <p>
               Desarrollo de APIs eficientes con <strong>Node.js</strong> y
               <strong> Express</strong>, complementado con gestion de datos
-              escalable en entornos <strong>NoSQL</strong>.
+              escalable en entornos <strong>SQL y NoSQL</strong>.
             </p>
           </div>
 
@@ -115,8 +128,8 @@ export default function About() {
             <h3 className="skill-title-featured">Integracion de IA</h3>
             <p>
               Desarrollo con LLMs como <strong>Claude</strong> y
-              <strong> Gemini</strong> para potenciar productos, optimizar flujos
-              y acelerar la entrega de valor.
+              <strong> Gemini</strong> para potenciar productos, optimizar
+              flujos y acelerar la entrega de valor.
             </p>
           </div>
         </div>
