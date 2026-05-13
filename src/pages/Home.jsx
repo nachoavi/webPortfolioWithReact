@@ -1,29 +1,96 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowUpRight, BriefcaseBusiness, Mail, Sparkles } from "lucide-react";
+import {
+  ArrowUpRight,
+  BriefcaseBusiness,
+  Mail,
+  Sparkles,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
+
+const taskFlowProject = {
+  id: 1,
+  title: "TaskFlow - Sistema de Gestión de Tareas",
+  images: [
+    "/TaskProjectIMGs/TaskManager.png",
+    "/TaskProjectIMGs/Login.png",
+    "/TaskProjectIMGs/MyTask.png",
+    "/TaskProjectIMGs/UserManager.png",
+  ],
+  url: "https://task-project-front-psi.vercel.app/login",
+  repoUrl: "https://github.com/nachoavi/taskProyectAPI",
+  repoFrontUrl: "https://github.com/nachoavi/taskProjectFront",
+  description:
+    "Aplicación de gestión de tareas con autenticación segura, gestión de usuarios y panel administrativo. Los usuarios pueden crear, editar y organizar sus tareas, mientras los administradores gestionan usuarios, monitorean actividad y asignar tareas.",
+  technologies: [
+    "Node.js",
+    "Express",
+    "React",
+    "JSON Web Token",
+    "Prisma",
+    "PostgreSQL",
+  ],
+  detailedDescription: {
+    backend:
+      "El backend está construido con Node.js y Express, utilizando Prisma como ORM para interactuar con PostgreSQL. Implementa autenticación robusta con JWT (JSON Web Token) que incluye refresh tokens para mantener sesiones seguras. La API RESTful proporciona endpoints para gestión de usuarios, tareas, y estadísticas del sistema.",
+    frontend:
+      "El frontend en React gestiona el estado global con Context API, ofreciendo una interfaz fluida para crear, editar y organizar tareas. Incluye filtrado por estado, prioridad y fecha, con animaciones suaves gracias a Framer Motion. El diseño responsivo se adapta a dispositivos móviles y escritorio.",
+    database:
+      "PostgreSQL almacena usuarios, tareas y registros de actividad. Prisma facilita las migraciones y queries tipadas. El schema incluye relaciones entre usuarios y tareas, con índices optimizados para búsquedas frecuentes.",
+    security:
+      " JWT con tokens de acceso y refresh, hash de contraseñas con bcrypt, protección CORS y rate limiting. Validación de datos con Zod en el backend.",
+  },
+};
+
+function ImageCarousel({ images }) {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prev = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((i) => (i === 0 ? images.length - 1 : i - 1));
+  };
+  const next = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((i) => (i === images.length - 1 ? 0 : i + 1));
+  };
+  const goToSlide = (e, index) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex(index);
+  };
+
+  return (
+    <div className="carousel-container">
+      <div className="carousel-wrapper">
+        <img
+          src={images[currentIndex]}
+          alt={`Slide ${currentIndex + 1}`}
+          className="carousel-image"
+        />
+      </div>
+      <button className="carousel-btn carousel-btn-prev" onClick={prev}>
+        <ChevronLeft size={20} />
+      </button>
+      <button className="carousel-btn carousel-btn-next" onClick={next}>
+        <ChevronRight size={20} />
+      </button>
+      <div className="carousel-dots">
+        {images.map((_, i) => (
+          <span
+            key={i}
+            className={`carousel-dot ${i === currentIndex ? "active" : ""}`}
+            onClick={(e) => goToSlide(e, i)}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
 
 export default function Home() {
-  const [projects, setProjects] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-      const fetchProjects = async () => {
-        try {
-          const response = await fetch("http://localhost:5001/api/projects");
-          if (response.ok) {
-            const data = await response.json();
-            setProjects(data);
-          }
-        } catch (error) {
-          console.error("Error fetching projects:", error);
-        } finally {
-          setLoading(false);
-        }
-    };
-
-    fetchProjects();
-  }, []);
-
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
     visible: {
@@ -54,7 +121,10 @@ export default function Home() {
           tecnicos.
         </p>
         <div className="hero-actions">
-          <a className="btn btn-primary" href="mailto:luis17.sanmartin@gmail.com">
+          <a
+            className="btn btn-primary"
+            href="mailto:luis17.sanmartin@gmail.com"
+          >
             <Mail size={18} />
             Contactar
           </a>
@@ -85,50 +155,76 @@ export default function Home() {
           mantenibilidad para escalar en entornos reales.
         </p>
 
-        {loading ? (
-          <div className="projects-status">Cargando proyectos...</div>
-        ) : projects.length === 0 ? (
-          <div className="projects-status">
-            No hay proyectos cargados por ahora. Puedes revisar mis repositorios
-            en GitHub para ver mas ejemplos.
-          </div>
-        ) : (
-          <div className="projects-grid">
-            {projects.map((project) => (
-              <motion.a
-                href={project.url || "#"}
-                className="project-card"
-                key={project.id}
-                variants={itemVariants}
-                target={project.url ? "_blank" : undefined}
-                rel={project.url ? "noopener noreferrer" : undefined}
-              >
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="project-image"
-                />
-                <div className="project-content">
-                  <div className="project-header">
-                    <h3 className="project-title">{project.title}</h3>
-                    <ArrowUpRight size={18} color="var(--text-secondary)" />
-                  </div>
-                  <p className="project-desc">{project.description}</p>
-                  <div className="tech-stack">
-                    {(Array.isArray(project.technologies)
-                      ? project.technologies
-                      : []
-                    ).map((tech) => (
-                      <span key={tech} className="tech-tag">
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
+        <div className="projects-grid">
+          <motion.a
+            href={taskFlowProject.url}
+            className="project-card"
+            key={taskFlowProject.id}
+            variants={itemVariants}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <ImageCarousel images={taskFlowProject.images} />
+            <div className="project-content">
+              <div className="project-header">
+                <h3 className="project-title">{taskFlowProject.title}</h3>
+                <ArrowUpRight size={18} color="var(--text-secondary)" />
+              </div>
+              <p className="project-desc">{taskFlowProject.description}</p>
+              <div className="project-links">
+                <a
+                  href={taskFlowProject.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Ver App Desplegada
+                </a>
+                <a
+                  href={taskFlowProject.repoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Repositorio API
+                </a>
+                <a
+                  href={taskFlowProject.repoFrontUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  Repositorio Frontend
+                </a>
+              </div>
+              <div className="tech-details">
+                <div className="tech-section">
+                  <h4>Backend</h4>
+                  <p>{taskFlowProject.detailedDescription.backend}</p>
                 </div>
-              </motion.a>
-            ))}
-          </div>
-        )}
+                <div className="tech-section">
+                  <h4>Frontend</h4>
+                  <p>{taskFlowProject.detailedDescription.frontend}</p>
+                </div>
+                <div className="tech-section">
+                  <h4>Base de Datos</h4>
+                  <p>{taskFlowProject.detailedDescription.database}</p>
+                </div>
+                <div className="tech-section">
+                  <h4>Seguridad</h4>
+                  <p>{taskFlowProject.detailedDescription.security}</p>
+                </div>
+              </div>
+              <div className="tech-stack">
+                {taskFlowProject.technologies.map((tech) => (
+                  <span key={tech} className="tech-tag">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.a>
+        </div>
       </motion.section>
     </>
   );
